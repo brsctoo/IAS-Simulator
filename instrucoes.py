@@ -9,7 +9,7 @@ def endereco_para_inteiro(endereco):
         return endereco
 
   # Transforma M(x) em x
-  endereco = endereco.strip().replace('M(', '').replace(')', '')
+  endereco = endereco.strip().replace('M(', '').replace(')', '').replace(',' , '')
   return int(endereco, 0)
 
 def executar_load(endereco):

@@ -82,13 +82,38 @@ def main():
     for i, valor in enumerate(programa['dados']):
         memoria_ram[i] = valor
 
+    addr_instrucao = programa['endereco_inicial'] 
+    for instrucao in programa['instrucoes']:
+        memoria_ram[addr_instrucao] = instrucao
+        addr_instrucao +=1
+    
     registradores['PC'] = programa['endereco_inicial']
 
-    # ciclo de busca:
-    registradores['MAR'] = registradores['PC']
-    registradores['MBR'] = memoria_ram[registradores['MAR']]
-    registradores['IR'] = registradores['MBR']
-    registradores['PC'] += 1
+    print("Estado Inicial:")
+    printar_estado()
+    
+    flag = True
+    while flag:
+
+        # ciclo de busca:
+        registradores['MAR'] = registradores['PC']
+        registradores['MBR'] = memoria_ram[registradores['MAR']]
+        registradores['IR'] = registradores['MBR']
+        registradores['PC'] += 1
+
+        instrucao_atual = registradores['IR']
+        if instrucao_atual == 0 or instrucao_atual == "":
+            print("Fim do programa.")
+            flag = False
+            continue
+    
+        print(f"Instrução a ser executada: {instrucao_atual}")
+
+        #Execucao:
+        executar_instrucao(instrucao_atual)
+        printar_estado()
+        
+
 
     #debug
     printar_estado()
