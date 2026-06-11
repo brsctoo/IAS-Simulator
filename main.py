@@ -1,5 +1,6 @@
 import os
 from memoria import registradores, memoria_ram
+from instrucoes import executar_instrucao
 
 def hex_para_indice(hex_str):
     hex_str = hex_str.strip()
@@ -88,9 +89,9 @@ def main():
     registradores['MBR'] = memoria_ram[registradores['MAR']]
     registradores['IR'] = registradores['MBR']
     registradores['PC'] += 1
- 
-    #debug 
+
+    #debug
     printar_estado()
-    
+
 if __name__ == "__main__":
     main()

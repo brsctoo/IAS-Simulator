@@ -78,3 +78,30 @@ def executar_jump_positivo(endereco):
 def executar_move(destino, origem):
     # destino ← origem
     registradores[destino] = registradores[origem]
+
+def executar_instrucao(instrucao: str):
+    partes = instrucao.strip().split()
+    operacao = partes[0].upper()
+
+    if operacao == 'LOAD':
+        executar_load(partes[1])
+    elif operacao == 'LOADI':
+        executar_loadI(partes[1])
+    elif operacao == 'STOR':
+        executar_store(partes[1])
+    elif operacao == 'STORI':
+        executar_storeI(partes[1])
+    elif operacao == 'ADD':
+        executar_add(partes[1])
+    elif operacao == 'SUB':
+        executar_sub(partes[1])
+    elif operacao == 'MULT':
+        executar_mult(partes[1])
+    elif operacao == 'JUMP':
+        executar_jump(partes[1])
+    elif operacao == 'JUMP+':
+        executar_jump_positivo(partes[1])
+    elif operacao == 'MOV':
+        executar_move(partes[1].replace(',', ''), partes[2])
+    else:
+        print(f"Instrução desconhecida: {operacao}")
