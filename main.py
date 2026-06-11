@@ -64,6 +64,7 @@ def interpretar_entrada(caminho):
     }
 
 def printar_estado():
+    ''' Imprime o estado dos regs e da memória para debug '''
     print(f"\nPC: {indice_para_hex(registradores['PC'])} | MAR: {indice_para_hex(registradores['MAR'])}")
     print(f"IR: {registradores['IR']} | MBR: {indice_para_hex(registradores['MBR'])}")
     print(f"A: {registradores['A']} | B: {registradores['B']}")
