@@ -1,14 +1,5 @@
 import os
-
-memoria_ram = [0] * 256
-
-registradores = {
-    'A': 0, 'B': 0,
-    'PC': 0, 'IR': '',
-    'MAR': 0, 'MBR': 0,
-    'AC': 0, 'M': 0, 'R': 0,
-    'C': 0, 'N': 0, 'Z': 0
-}
+from memoria import registradores, memoria_ram
 
 def hex_para_indice(hex_str):
     hex_str = hex_str.strip()
@@ -20,30 +11,30 @@ def indice_para_hex(indice):
 def ler_entrada(caminho):
     if not os.path.exists(caminho):
         print(f"Arquivo de testes '{caminho}' não foi encontrado.")
-        return
-
+        return None
     linhas = []
-
     with open(caminho) as arq:
         for i in arq:
             linhas.append(i)
-
     return linhas
 
 def interpretar_entrada(caminho):
     lst_linhas = ler_entrada(caminho)
-
     if not lst_linhas:
         return None
 
     dados = []
     endereco_inicial = None
     instrucoes = []
-
     secao_atual = 0
 
     for linha in lst_linhas:
         linha = linha.strip()
+        if not linha:
+            secao_atual += 1
+            continue
+        if linha.startswith('#'):
+            continue
 
         if not linha or linha.startswith('#'):
             if linha.startswith('#'):
@@ -96,7 +87,7 @@ def main():
     registradores['MBR'] = memoria_ram[registradores['MAR']]
     registradores['IR'] = registradores['MBR']
     registradores['PC'] += 1
-
+ 
     #debug 
     printar_estado()
     
