@@ -8,6 +8,8 @@ def hex_para_indice(hex_str):
     return int(hex_str, 16)
 
 def indice_para_hex(indice):
+    if isinstance(indice, str):
+        return indice
     return f"0x{indice:02X}"
 
 def ler_entrada(caminho):
