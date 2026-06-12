@@ -37,11 +37,11 @@ def interpretar_entrada(caminho):
         if linha.startswith('#'):
             continue
 
-        if not linha or linha.startswith('#'):
-            if linha.startswith('#'):
-                continue
-            secao_atual += 1
-            continue
+#        if not linha or linha.startswith('#'):
+#            if linha.startswith('#'):
+#                continue
+#            secao_atual += 1
+#            continue
 
         if secao_atual == 0:
             try:
@@ -112,6 +112,7 @@ def main():
         #Execucao:
         executar_instrucao(instrucao_atual)
         printar_estado()
+        input("Pressione ENTER para continuar...")
         
 
 
