@@ -1,0 +1,53 @@
+.DADOS
+10
+1
+2
+1
+0
+0
+0x20
+0
+
+.INICIO
+# Endereço inicial das Instruções
+0x40
+
+.CODIGO
+# Instruções
+# vetor[0] = F(0)
+LOAD M(0x06)
+STOR M(0x07)
+LOAD M(0x04)
+STORI M(0x07)
+# vetor[1] = F(1)
+LOAD M(0x06)
+ADD M(0x01)
+STOR M(0x07)
+LOAD M(0x03)
+STORI M(0x07)
+# LOOP: enquanto i < N
+LOAD M(0x02)
+SUB M(0x00)
+JUMP+ M(0x5C)
+# F(i) = F(i-1) + F(i-2)
+LOAD M(0x03)
+ADD M(0x04)
+STOR M(0x05)
+# vetor[i] = F(i)
+LOAD M(0x06)
+ADD M(0x02)
+STOR M(0x07)
+LOAD M(0x05)
+STORI M(0x07)
+# desloca: F(i-2) <- F(i-1) ; F(i-1) <- F(i)
+LOAD M(0x03)
+STOR M(0x04)
+LOAD M(0x05)
+STOR M(0x03)
+# i++
+LOAD M(0x02)
+ADD M(0x01)
+STOR M(0x02)
+JUMP M(0x49)
+# FIM
+HALT
